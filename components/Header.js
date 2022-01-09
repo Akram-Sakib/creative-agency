@@ -1,11 +1,14 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Navbar, Container, Nav, Form } from "react-bootstrap";
-import logo from './../images/logo.png'
+import logo from "./../images/logo.png";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Header = () => {
-
   const [colorChange, setColorchange] = useState(false);
+  const router = useRouter();
+
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
       setColorchange(true);
@@ -15,7 +18,25 @@ const Header = () => {
   };
   useEffect(() => {
     window.addEventListener("scroll", changeNavbarColor);
-  }, [])
+  }, []);
+
+  const handleHomeRoute = (e) => {
+    e.preventDefault();
+    router.push("/");
+  };
+  const handlePortfolioRoute = (e) => {
+    e.preventDefault();
+    router.push("/our-portfolio");
+  };
+  const handleTeamRoute = (e) => {
+    e.preventDefault();
+    router.push("/our-team");
+  };
+  const handleContactRoute = (e) => {
+    e.preventDefault();
+    router.push("/contact-us");
+  };
+
 
   return (
     <header>
@@ -27,13 +48,17 @@ const Header = () => {
       >
         <Container>
           <Navbar.Brand href="#">
-            <Image
-              alt=""
-              src={logo}
-              width={90}
-              height={30}
-              className="d-inline-block align-top"
-            />
+            <Link href="/">
+              <a>
+                <Image
+                  alt=""
+                  src={logo}
+                  width={90}
+                  height={30}
+                  className="d-inline-block align-top"
+                />
+              </a>
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll" className="navbar-style">
@@ -42,12 +67,14 @@ const Header = () => {
               style={{ maxHeight: "120px" }}
               navbarScroll
             ></Nav>
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Our Portfolio</Nav.Link>
-            <Nav.Link href="#">Our Team</Nav.Link>
-            <Nav.Link href="#">Contact Us</Nav.Link>
+            <Nav.Link onClick={handleHomeRoute}>Home</Nav.Link>
+            <Nav.Link onClick={handlePortfolioRoute}>Our Portfolio</Nav.Link>
+            <Nav.Link onClick={handleTeamRoute}>Our Team</Nav.Link>
+            <Nav.Link onClick={handleContactRoute}>Contact Us</Nav.Link>
             <Form className="d-flex ms-3">
-              <a className="button-primary">Login</a>
+              <Link href="/login">
+                <a className="button-primary">Login</a>
+              </Link>
             </Form>
           </Navbar.Collapse>
         </Container>

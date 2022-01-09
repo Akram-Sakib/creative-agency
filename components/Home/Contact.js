@@ -13,6 +13,29 @@ const Contact = () => {
     } = useForm();
 
     const onSubmit = (data) => console.log(data);
+
+    /* Email Sending */
+    const form = useRef();
+
+     const sendEmail = (e) => {
+       e.preventDefault();
+
+       emailjs
+         .sendForm(
+           "service_5gn0cks",
+           "template_45jv1i7",
+           form.current,
+           "user_o7O07d34s7XBqpunKdUtT"
+         )
+         .then(
+           (result) => {
+             console.log(result.text);
+           },
+           (error) => {
+             console.log(error.text);
+           }
+         );
+     };
     
   return (
     <section className="contact-section">
@@ -30,20 +53,22 @@ const Contact = () => {
             </Col>
             <Col md={6}>
               <div className="contact-right">
-                <Form onSubmit={handleSubmit(onSubmit)}>
+                <Form ref={form} onSubmit={handleSubmit(onSubmit)}>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Control
                       className="py-3"
                       type="email"
                       placeholder="Your email address"
+                      name="email"
                     />
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Control
                       className="py-3"
-                      type="password"
+                      type="text"
                       placeholder="Your name / company's name"
+                      name="name"
                     />
                   </Form.Group>
 

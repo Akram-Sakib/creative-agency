@@ -10,7 +10,7 @@ const Banner = () => {
           <Row>
             <Col md={4} sm={12}>
               <div className="banner-left-content">
-                <h1>Let's Grow Your Brand To The Next Level</h1>
+                <h1>Let&apos;s Grow Your Brand To The Next Level</h1>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim
                   sint asperiores doloribus facilis? Ullam aperiam magnam.
